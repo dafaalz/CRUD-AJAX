@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AJAX CRUD CI4 Bootstrap MWAH</title>
-    <!-- Bootstrap 5 CSS -->
+    <!-- butstrep 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
@@ -155,7 +155,7 @@
         });
     });
 </script>
-<!-- Bootstrap 5 JS bundle -->
+<!-- butstrep 5 js bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
