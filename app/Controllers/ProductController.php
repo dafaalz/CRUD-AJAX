@@ -10,7 +10,7 @@ class ProductController extends BaseController
 {
     public function index()
     {
-        return view('product_view'); //show all products, maybe
+        return view('product_view');
     }
 
     public function fetch() 
@@ -27,6 +27,12 @@ class ProductController extends BaseController
             'name' => $this-> request-> getPost('name'),
             'price' => $this-> request-> getPost('price'),
         ];
+        if (!isset($data['name']) || !isset($data['price'])) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Name and price cannot be empty'
+            ]);
+        }
         $model->updateProduct($id, $data);
         return $this->response->setJSON(['status' => 'success']);
     }
@@ -45,7 +51,12 @@ class ProductController extends BaseController
             'name' => $this->request->getPost('name'),
             'price' => $this->request->getPost('price'),
         ];
-
+        if (!isset($data['name']) || !isset($data['price'])) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Name and price cannot be empty'
+            ]);
+        }
         $model ->saveProduct($data);
         return $this-> response->setJSON(['status' => 'success']);
 

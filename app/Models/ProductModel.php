@@ -58,21 +58,31 @@ class ProductModel extends Model
     }
 
     public function updateProduct($id, $data) {
+        if(!isset($id) || !isset($data)) {
+            return false;
+        }
         return $this -> update($id, $data);
     }
 
     public function deleteProduct($id) {
-
+        if(!isset($id)) {
+            return false;
+        }
         return $this -> delete($id);
     }
 
     public function saveProduct($data)
     {
-
+        if(!isset($data)) {
+            return false;
+        }
         return $this -> insert($data);
     }
 
     public function edit($id) {
+        if(!isset($id)) {
+            return false;
+        }
         return $this->find($id);
     }
 
