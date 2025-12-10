@@ -51,7 +51,8 @@ class ProductModel extends Model
     public function getProducts($query = null)
     {
         if ($query) {
-            return $this->like('name', $query)->findAll();
+            $q = strtolower($query);
+            return $this->where("LOWER(name) LIKE '%{$q}%'", null, false)->findAll();
         }
         return $this->findAll();
     }
