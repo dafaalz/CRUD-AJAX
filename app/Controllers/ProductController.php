@@ -15,9 +15,27 @@ class ProductController extends BaseController
 
     public function fetch() 
     {
+        $query = $this->request->getVar('query');
         $model = new ProductModel();
-        $data = $model->orderBy('id', 'DESC')->findAll();
-        return $this->response->setJSON($data);
+        return $this-> response-> setJSON($model->getProducts($query));
+    }
+
+    public function update($id)
+    {
+        $model = new ProductModel();
+        $data = [
+            'name' => $this-> request-> getPost('name'),
+            'price' => $this-> request-> getPost('price'),
+        ];
+        $model->updateProduct($id, $data);
+        return $this->response->setJSON(['status' => 'success']);
+    }
+
+    public function delete($id)
+    {
+        $model = new ProductModel();
+        $model->deleteProduct($id);
+        return $this->response->setJSON(['status' => 'success']);
     }
 
     public function store()
@@ -27,29 +45,17 @@ class ProductController extends BaseController
             'name' => $this->request->getPost('name'),
             'price' => $this->request->getPost('price'),
         ];
-        $model -> insert($data);
-        return $this->response->setJSON(['status' => 'success']);
+
+        $model ->saveProduct($data);
+        return $this-> response->setJSON(['status' => 'success']);
+
     }
 
-    public function edit($id) {
-        $model = new ProductModel();
-        $data = $model->find($id);
-        return $this->response->setJSON($data);
-    }
+    public function edit($id) 
+    {
+        $model =new ProductModel();
 
-    public function update($id) {
-        $model = new ProductModel();
-        $data = [
-            'name' => $this -> request -> getPost('name'),
-            'price' => $this -> request -> getPost('price'),
-        ];
-        $model -> update($id, $data);
-        return $this->response->setJSON(['status' => 'success']);
-    }
-
-    public function delete($id) {
-        $model = new ProductModel();
-        $model -> delete($id);
-        return $this->response->setJSON(['status' => 'success']);
+        $data = $model->edit($id);
+        return $this-> response-> setJSON($data);
     }
 }
