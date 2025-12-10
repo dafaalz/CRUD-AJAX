@@ -31,6 +31,17 @@
         </div>
     </form>
 
+    <form id="searchForm" class="mb-4">
+        <div class="row g-3">
+            <div class="col-md-10">
+                <input type="text" name="search" id="search" class="form-control" placeholder="Search">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </div>
+    </form>
+
     <!-- Table -->
     <table class="table table-striped table-bordered" id="productTable">
         <thead class="table-dark">
@@ -47,8 +58,9 @@
 
 <script>
     // ambil semua produk dari server
-    function fetchProducts() {
-        $.get('products/fetch', function(data){
+    function fetchProducts($query = null) {
+        $query = $('#search').val()
+        $.get('products/fetch?query=' + $query, function(data){
             let rows = '';
             try {
                 let products = (typeof data === 'string') ? JSON.parse(data) : data;
@@ -77,8 +89,15 @@
     $(document).ready(function() {
         fetchProducts();
 
+        $('#searchForm').submit(function(e){
+            e.preventDefault()
+            $query = $('#search').val()
+            fetchProducts($query);
+        })
+
         // reset form
         $('#resetForm').click(function(){
+            $('#productForm')[0].reset();
             $('#productForm')[0].reset();
             $('#id').val('');
         });

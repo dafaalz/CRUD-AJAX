@@ -48,15 +48,12 @@ class ProductModel extends Model
     protected $afterDelete    = [];
 
 
-    public function getProducts($query = null) 
+    public function getProducts($query = null)
     {
-        if($query) {
-            return $this->like('name', $query)
-            ->orderBy('id', 'DESC')
-            ->findAll();
-        } else {
-            return $this->orderBy('id', 'DESC')->findAll();
+        if ($query) {
+            return $this->like('name', $query)->findAll();
         }
+        return $this->findAll();
     }
 
     public function updateProduct($id, $data) {
